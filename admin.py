@@ -32,3 +32,28 @@ def import_users():
 
     return redirect(url_for('home'))
 
+@admin_bp.route('/export_report')
+def export_report():
+    import pandas as pd
+    from flask import send_file
+    # Lấy toàn bộ câu trả lời khảo sát
+    responses = SurveyResponse.query.all()
+    
+    # Tạo danh sách chứa dữ liệu
+    data = []
+    for r in responses:
+        data.append({
+            'User ID': r.user_id,
+            'Response': r.response
+        })
+    
+    # Chuyển dữ liệu thành DataFrame của pandas
+    df = pd.DataFrame(data)
+    
+    # Lưu DataFrame ra file Excel
+    output_file = 'survey_report.xlsx'
+    df.to_excel(output_file, index=False)
+    
+    # Gửi file Excel cho người dùng download
+    return send_file(output_file, as_attachment=True)
+
