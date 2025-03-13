@@ -1,0 +1,32 @@
+/* Ví dụ trang trí cho trang statistics */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url("../Theme-03.png") no-repeat center center;
+  background-size: cover;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: rgba(255,255,255,0.8);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+h1 {
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #333;
+}
+

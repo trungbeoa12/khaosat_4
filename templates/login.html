@@ -1,24 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <style>
+    /* Nếu muốn tuỳ chỉnh thêm, bạn có thể thêm code CSS tại đây */
+    body {
+      background-color: #f8f9fa; /* màu nền nhạt của Bootstrap */
+    }
+    .login-container {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .login-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .back-home {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <h1>Login</h1>
-    <form method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        
-        <button type="submit">Login</button>
-    </form>
-    <br>
-    <a href="{{ url_for('home') }}">Back to Home</a>
+
+<!-- Navbar nếu bạn muốn (tùy chọn) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Survey App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <!-- Nếu cần thêm item, bỏ vào đây -->
+    </ul>
+  </div>
+</nav>
+
+<div class="login-container">
+  <h1>Login</h1>
+  <form method="POST">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="username" 
+        name="username" 
+        required 
+        autofocus
+        placeholder="Nhập tên đăng nhập"
+      >
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input 
+        type="password" 
+        class="form-control" 
+        id="password" 
+        name="password" 
+        required
+        placeholder="Nhập mật khẩu"
+      >
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+  </form>
+  <a href="{{ url_for('home') }}" class="back-home">Back to Home</a>
+</div>
+
+<!-- Bootstrap JS đặt cuối body -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
 

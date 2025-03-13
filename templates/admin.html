@@ -3,55 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin Panel</title>
-  <!-- Bạn có thể sử dụng Bootstrap nếu muốn giao diện đẹp hơn -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css"> -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
   <style>
-    /* Một số style cơ bản nếu không dùng Bootstrap */
     body {
+      margin: 0;
+      padding: 0;
+      background: url("{{ url_for('static', filename='Theme-03.png') }}") no-repeat center center fixed;
+      background-size: cover;
       font-family: Arial, sans-serif;
-      margin: 20px;
     }
-    .container {
-      max-width: 800px;
-      margin: auto;
-    }
-    h1 {
+
+    .admin-container {
+      max-width: 600px;
+      margin: 100px auto;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 30px;
+      border-radius: 5px;
       text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-    ul {
+
+    h1 {
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .admin-links {
       list-style-type: none;
       padding: 0;
+      margin-bottom: 30px;
     }
-    li {
-      margin: 10px 0;
+
+    .admin-links li {
+      margin: 15px 0;
     }
-    a {
-      text-decoration: none;
+
+    .admin-links a {
       color: #007bff;
       font-size: 18px;
+      text-decoration: none;
+      font-weight: 500;
     }
-    a:hover {
+    .admin-links a:hover {
       text-decoration: underline;
     }
-    .back-home {
-      display: block;
+
+    .bottom-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
       margin-top: 20px;
-      text-align: center;
+    }
+
+    .bottom-links a {
       font-weight: bold;
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .bottom-links a:hover {
+      color: #0056b3;
+      text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
+  <div class="admin-container">
     <h1>Admin Panel</h1>
-    <ul>
+    <ul class="admin-links">
       <li><a href="{{ url_for('admin.export_overall') }}">Xuất báo cáo tổng</a></li>
       <li><a href="{{ url_for('admin.not_responded') }}">Xem danh sách User chưa làm khảo sát</a></li>
       <li><a href="{{ url_for('admin.statistics') }}">Thống kê tổng hợp</a></li>
     </ul>
-    <a class="back-home" href="{{ url_for('home') }}">Back to Home</a>
+
+    <!-- Phần link bên dưới: Back to Home & Logout -->
+    <div class="bottom-links">
+      <a href="{{ url_for('home') }}">Back to Home</a>
+      <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </div>
   </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
 
