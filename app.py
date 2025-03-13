@@ -4,6 +4,7 @@ from flask_login import LoginManager, login_required, current_user
 from database import init_db, db
 from models import User, SurveyResponse
 from auth import auth_bp
+from admin import admin_bp
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
@@ -32,7 +33,9 @@ def survey():
         return redirect(url_for('home'))
     return render_template('survey.html')
 
+# Đăng ký các Blueprint
 app.register_blueprint(auth_bp)
+app.register_blueprint(admin_bp, url_prefix='/admin')
 
 if __name__ == '__main__':
     app.run(debug=True)
