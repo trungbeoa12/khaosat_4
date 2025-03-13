@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Survey Form</h1>
+    <form method="POST">
+        <label for="response">Your Response:</label><br>
+        <textarea id="response" name="response" rows="4" cols="50" required></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>
+
