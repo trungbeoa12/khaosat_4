@@ -1,32 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <!-- Nếu bạn sử dụng Bootstrap, bạn có thể thêm link CDN ở đây -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <!-- Bạn có thể sử dụng Bootstrap nếu muốn giao diện đẹp hơn -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* Một số style cơ bản nếu không dùng Bootstrap */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin: 10px 0;
+    }
+    a {
+      text-decoration: none;
+      color: #007bff;
+      font-size: 18px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .back-home {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
     <h1>Admin Panel</h1>
-    <h2>Survey Responses</h2>
-    <table border="1">
-        <tr>
-            <th>User</th>
-            <th>Response</th>
-        </tr>
-        {% for response in responses %}
-        <tr>
-            <td>{{ response.user_id }}</td>
-            <td>{{ response.response }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <!-- Nút xuất báo cáo -->
-    <a href="{{ url_for('admin.export_report') }}" class="btn btn-success">Xuất báo cáo khảo sát</a>
-    <br><br>
-    <a href="{{ url_for('home') }}">Back to Home</a>
+    <ul>
+      <li><a href="{{ url_for('admin.export_overall') }}">Xuất báo cáo tổng</a></li>
+      <li><a href="{{ url_for('admin.not_responded') }}">Xem danh sách User chưa làm khảo sát</a></li>
+      <li><a href="{{ url_for('admin.statistics') }}">Thống kê tổng hợp</a></li>
+    </ul>
+    <a class="back-home" href="{{ url_for('home') }}">Back to Home</a>
+  </div>
 </body>
 </html>
 

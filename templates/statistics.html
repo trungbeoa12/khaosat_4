@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Survey Statistics</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Thống kê tổng hợp khảo sát</h1>
+  <ul>
+    <li>Total Users: {{ stats["Total Users"] }}</li>
+    <li>Total Survey Responses: {{ stats["Total Survey Responses"] }}</li>
+    <li>Users Responded: {{ stats["Users Responded"] }}</li>
+    <li>Users Not Responded: {{ stats["Users Not Responded"] }}</li>
+  </ul>
+  <br>
+  <a href="{{ url_for('admin.admin_panel') }}">Back to Admin Panel</a>
+</body>
+</html>
+
