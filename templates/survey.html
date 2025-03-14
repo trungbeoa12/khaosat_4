@@ -4,10 +4,47 @@
     <meta charset="UTF-8">
     <title>Khảo sát Siêu PGD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link tới file CSS riêng cho trang khảo sát -->
+    <!-- Link tới file CSS của bạn -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/survey.css') }}">
+    <style>
+      /* CSS cho popup thông báo */
+      .popup {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999;
+      }
+      .popup-content {
+          background: #fff;
+          padding: 20px 30px;
+          border-radius: 5px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+          font-size: 18px;
+          text-align: center;
+      }
+    </style>
 </head>
 <body>
+    {% if redirect_after_submission|default(false) %}
+      <div class="popup" id="popup">
+          <div class="popup-content">
+              Thực hiện khảo sát thành công, xin trân trọng cảm ơn!
+          </div>
+      </div>
+      <script>
+        // Sau 3 giây, chuyển hướng sang trang chủ và ẩn popup
+        setTimeout(function(){
+          window.location.href = "{{ url_for('home') }}";
+        }, 3000);
+      </script>
+    {% endif %}
+    
     <div class="survey-container">
         <!-- Header với nút Logout -->
         <div class="header">
@@ -15,127 +52,150 @@
         </div>
         <h1>Khảo sát Siêu PGD</h1>
         <form action="{{ url_for('survey') }}" method="POST">
-            <!-- SECTION I: Cơ sở vật chất, trang thiết bị của các Siêu PGD -->
+            <!-- Cơ sở vật chất, trang thiết bị của các Siêu PGD -->
             <section class="section">
-                <h2>I. Cơ sở vật chất, trang thiết bị của các Siêu PGD</h2>
+                <h2>
+                    I. Theo Anh/Chị, để các Siêu PGD phát huy được tối đa hiệu quả theo như mục tiêu kỳ vọng, 
+                    NHCTVN cần có những cơ chế đặc thù, cần được đầu tư thêm nguồn lực gì đối với các Siêu PGD?
+                </h2>
+                <p>Cách thức trả lời:</p>
+                <p>- Anh/Chị tích chọn vào câu trả lời đã được gợi ý trong Phiếu khảo sát nếu đánh giá phù hợp (có thể tích chọn nhiều phương án).</p>
+                <p>
+                    - Với các câu trả lời đã được gợi ý trong Phiếu khảo sát, Anh/Chị có thể ghi chi tiết nội dung đề xuất 
+                    tại Cột "Đề xuất cụ thể". Ví dụ: Với lựa chọn câu trả lời là "Nâng hạn mức phê duyệt giao dịch đối với siêu PGD", 
+                    Anh/Chị ghi cụ thể mức hạn mức phê duyệt có thể tăng cho các Siêu PGD theo quan điểm của Anh/Chị.
+                </p>
+                <p>
+                    - Ngoài các câu trả lời được gợi ý trong Phiếu khảo sát, Anh/Chị có thể bổ sung thêm ý kiến bằng cách tích chọn 
+                    vào Mục Ý kiến khác và ghi chi tiết ý kiến tại Cột "Đề xuất cụ thể".
+                </p>
+                <h3>Cơ sở vật chất, trang thiết bị của các Siêu PGD</h3>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="infrastructure[]" value="Được đầu tư mua trụ sở/ thuê địa điểm mới">
                         1. Được đầu tư mua trụ sở/ thuê địa điểm mới để đảm bảo sự ổn định trong hoạt động
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="infrastructure[]" value="Áp dụng mô hình sảnh giao dịch chuẩn">
                         2. Áp dụng mô hình sảnh giao dịch chuẩn (khu vực giao dịch KHƯT, giao dịch tự động, tư vấn…)
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="infrastructure[]" value="Được trang bị máy R-ATM">
                         3. Được trang bị máy R-ATM
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="infrastructure[]" value="Được trang bị hệ thống lấy số tự động">
                         4. Được trang bị hệ thống lấy số tự động
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
-                    <label for="infrastructure_others">5. Ý kiến khác (nếu có):</label>
+                    <label for="infrastructure_others">Ý kiến khác (về Cơ sở vật chất, trang thiết bị của các Siêu PGD):</label>
                     <textarea id="infrastructure_others" name="infrastructure_others" rows="2" placeholder="Nhập ý kiến khác"></textarea>
                 </div>
             </section>
-
             <hr>
-
-            <!-- SECTION II: Cơ chế chính sách, quy định, quy trình áp dụng đối với các Siêu PGD -->
+            <!-- Cơ chế chính sách, quy định, quy trình áp dụng đối với các Siêu PGD -->
             <section class="section">
-                <h2>II. Cơ chế chính sách, quy định, quy trình áp dụng đối với các Siêu PGD</h2>
+                <h3>Cơ chế chính sách, quy định, quy trình áp dụng đối với các Siêu PGD</h3>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="policy[]" value="Nâng mức thẩm quyền cấp tín dụng">
                         1. Nâng mức thẩm quyền cấp tín dụng đối với Siêu PGD
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="policy[]" value="Nâng mức thẩm quyền giải ngân">
                         2. Nâng mức thẩm quyền giải ngân đối với Siêu PGD
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="policy[]" value="Nâng hạn mức phê duyệt giao dịch">
                         3. Nâng hạn mức phê duyệt giao dịch đối với Siêu PGD
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="policy[]" value="Mở rộng đối tượng phân khúc KHDN">
                         4. Mở rộng đối tượng phân khúc KHDN (theo doanh thu thuần) cho Siêu PGD
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="policy[]" value="Có các sản phẩm đặc thù dành riêng cho Siêu PGD">
                         5. Có các sản phẩm đặc thù dành riêng cho Siêu PGD
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
-                    <label for="policy_others">6. Ý kiến khác (nếu có):</label>
+                    <label for="policy_others">Ý kiến khác (về Cơ chế chính sách, quy định, quy trình áp dụng đối với các Siêu PGD):</label>
                     <textarea id="policy_others" name="policy_others" rows="2" placeholder="Nhập ý kiến khác"></textarea>
                 </div>
             </section>
-
             <hr>
-
-            <!-- SECTION III: Cơ chế hỗ trợ khác từ NHCTVN đối với các Siêu PGD -->
+            <!-- Cơ chế hỗ trợ khác từ NHCTVN đối với các Siêu PGD -->
             <section class="section">
-                <h2>III. Cơ chế hỗ trợ khác từ NHCTVN đối với các Siêu PGD</h2>
+                <h3>Cơ chế hỗ trợ khác từ NHCTVN đối với các Siêu PGD</h3>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="support[]" value="Cơ chế hỗ trợ chi phí xây dựng, sửa chữa, cải tạo trụ sở">
                         1. Cơ chế hỗ trợ chi phí xây dựng, sửa chữa, cải tạo trụ sở PGD, chuyển địa điểm PGD…
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="support[]" value="Ưu tiên hỗ trợ từ TSC/CN về nguồn khách hàng/đối tác">
                         2. Ưu tiên hỗ trợ từ TSC/CN về nguồn khách hàng/đối tác, tiên phong triển khai các định hướng lớn, trọng tâm
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="support[]" value="Bổ sung thêm nhân sự cho CN">
                         3. Bổ sung thêm nhân sự cho CN để có thêm nguồn lực cho Siêu PGD
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="support[]" value="Cơ chế động lực (lương, thưởng)">
                         4. Có cơ chế động lực (lương cho LĐP, lương thúc đẩy bán, lộ trình thăng tiến, thi đua khen thưởng…)
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="support[]" value="Các chương trình đào tạo chuyên sâu">
                         5. Có các chương trình đào tạo chuyên sâu để nâng cao nghiệp vụ
                     </label>
+                    <input type="text" name="infrastructure_supplementary[]" placeholder="Ý kiến bổ sung">
                 </div>
                 <div class="form-group">
-                    <label for="support_others">6. Ý kiến khác (nếu có):</label>
+                    <label for="support_others">Ý kiến khác (về Cơ chế hỗ trợ khác từ NHCTVN đối với các Siêu PGD):</label>
                     <textarea id="support_others" name="support_others" rows="2" placeholder="Nhập ý kiến khác"></textarea>
                 </div>
             </section>
-
             <hr>
-
-            <!-- SECTION IV: Các câu hỏi bổ sung -->
+            <!-- Các câu hỏi bổ sung -->
             <section class="section">
-                <h2>IV. Các câu hỏi khác</h2>
-                <p>II. Anh/Chị có đề xuất triển khai mô hình Siêu PGD với PGD của CN mình?</p>
+                <h2>II. Các câu hỏi khác</h2>
+                <p>1. Anh/Chị có đề xuất triển khai mô hình Siêu PGD với PGD của CN mình?</p>
                 <div class="form-group">
                     <label>
                         <input type="radio" name="propose_sieupgd" value="Có"> Có
@@ -145,20 +205,34 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <label for="pgd_code">III. Nếu có, vui lòng cho biết Mã PGD và Tên PGD:</label><br>
+                    <label for="pgd_code">
+                        2. Trường hợp có đề xuất triển khai mô hình Siêu PGD với PGD của CN mình, 
+                        Anh/chị vui lòng cho biết Mã PGD và Tên PGD theo quan điểm của Anh/Chị có thể 
+                        áp dụng triển khai mô hình Siêu PGD.
+                    </label><br>
                     <input type="text" id="pgd_code" name="pgd_code" placeholder="Mã PGD">
                     <input type="text" id="pgd_name" name="pgd_name" placeholder="Tên PGD">
                 </div>
                 <div class="form-group">
-                    <label for="other_banks_info">IV. Theo thông tin Anh/Chị đang có, trên địa bàn hoạt động của CN, có PGD của NHTM nào quy mô lớn khác biệt không? Nếu có, vui lòng nêu chi tiết:</label><br>
+                    <label for="other_banks_info">
+                        3. Theo thông tin Anh/Chị đang có, trên địa bàn hoạt động của CN hiện nay, 
+                        có PGD của NHTM nào đang có quy mô hoạt động lớn khác biệt hẳn so với các PGD khác không? 
+                        Trường hợp có những PGD của NHTM khác đang có quy mô hoạt động lớn khác biệt hẳn, 
+                        Anh/Chị vui lòng cho biết cụ thể tên PGD (kèm theo tên CN quản lý, tên NHTM) và bổ sung 
+                        thêm thông tin về những cơ chế hỗ trợ, nguồn lực mà PGD đó đang được các NHTM đầu tư 
+                        (nếu Anh/chị có thông tin):
+                    </label><br>
                     <textarea id="other_banks_info" name="other_banks_info" rows="3" placeholder="Nhập chi tiết"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="additional_opinions">V. Ý kiến khác (nếu có):</label><br>
+                    <h2>III. Ý kiến khác</h2>
+                    <p>
+                        (Ngoài những nội dung nêu trên, trường hợp Anh/Chị có thêm ý kiến góp ý 
+                        liên quan đến việc triển khai Siêu PGD, Anh/Chị vui lòng nhập ý kiến)
+                    </p>
                     <textarea id="additional_opinions" name="additional_opinions" rows="3" placeholder="Nhập ý kiến khác"></textarea>
                 </div>
             </section>
-
             <br>
             <button type="submit" class="submit-btn">Gửi Khảo Sát</button>
         </form>

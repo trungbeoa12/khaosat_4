@@ -35,26 +35,35 @@ def home():
 @login_required
 def survey():
     if request.method == 'POST':
-        # Lấy dữ liệu từ form khảo sát
+        # Lấy dữ liệu từ các ô checkbox và input text
+
+        # Phần I: Cơ sở vật chất, trang thiết bị của các Siêu PGD
         selected_infra = request.form.getlist('infrastructure[]')
+        infra_supplementary = request.form.getlist('infrastructure_supplementary[]')  # Bao gồm cả các ô bổ sung của phần I, II, III do cùng tên
         infra_others = request.form.get('infrastructure_others', '')
-        
+
+        # Phần II: Chính sách, quy định, quy trình áp dụng đối với các Siêu PGD
         policy = request.form.getlist('policy[]')
         policy_others = request.form.get('policy_others', '')
-        
+
+        # Phần III: Hỗ trợ khác từ NHCTVN đối với các Siêu PGD
         support = request.form.getlist('support[]')
         support_others = request.form.get('support_others', '')
-        
+
+        # Phần IV: Các câu hỏi khác
         propose_sieupgd = request.form.get('propose_sieupgd', '')
         pgd_code = request.form.get('pgd_code', '')
         pgd_name = request.form.get('pgd_name', '')
         other_banks_info = request.form.get('other_banks_info', '')
+
+        # Phần V: Ý kiến khác
         additional_opinions = request.form.get('additional_opinions', '')
-        
-        # Gộp tất cả dữ liệu vào một dict
+
+        # Định nghĩa data_dict với đầy đủ các cột mong muốn
         data_dict = {
-            "infrastructure": selected_infra,
-            "infrastructure_others": infra_others,
+            "infrastructure": selected_infra,                 # Danh sách các ô checkbox của phần I (nếu không chọn: [])
+            "infrastructure_supplementary": infra_supplementary,  # Danh sách các ô nhập "ý kiến bổ sung" (có thể rỗng nếu người dùng không nhập)
+            "infrastructure_others": infra_others,             # Nếu không nhập thì chuỗi rỗng
             "policy": policy,
             "policy_others": policy_others,
             "support": support,
@@ -65,6 +74,7 @@ def survey():
             "other_banks_info": other_banks_info,
             "additional_opinions": additional_opinions
         }
+
         # Chuyển dict thành chuỗi JSON
         response_text = json.dumps(data_dict, ensure_ascii=False)
         
@@ -74,10 +84,11 @@ def survey():
         db.session.commit()
         
         flash("Khảo sát của bạn đã được gửi thành công!", "success")
-        return redirect(url_for('home'))
+        return render_template('survey.html', redirect_after_submission=True)
     
-    # Nếu GET -> hiển thị form survey
+    # Nếu GET -> hiển thị form khảo sát
     return render_template('survey.html')
+
 
 # Đăng ký các Blueprint
 app.register_blueprint(auth_bp)

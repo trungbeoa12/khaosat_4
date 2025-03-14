@@ -1,72 +1,149 @@
-/* survey.css */
+/* Gợi ý CSS cho trang Khảo sát Siêu PGD */
+
+/* 
+   1. Đặt font chữ hiện đại hơn (Open Sans, Roboto, ...).
+   2. Dùng gradient đơn giản hoặc màu nền nhẹ nhàng.
+   3. Container trắng đục, chữ màu đậm để dễ đọc.
+   4. Các nút bấm có màu thống nhất.
+   5. Tiêu đề nổi bật nhưng vẫn hài hòa với tổng thể.
+*/
+
+/* Thiết lập font và nền cho toàn bộ trang */
 body {
-    font-family: Arial, sans-serif;
-    background: url("../Theme-03.png") no-repeat center center;
-    background-size: cover;
+    /* Nếu không có font Open Sans, fallback là sans-serif */
+    font-family: 'Open Sans', Arial, sans-serif;
+    /* Gradient nhẹ nhàng: xanh tím -> hồng cam */
+    background: linear-gradient(135deg, #a6c0fe 0%, #f68084 100%);
     margin: 0;
     padding: 0;
+    color: #2c3e50; /* Màu chữ chung */
 }
 
+/* Container chính của khảo sát */
 .survey-container {
     max-width: 800px;
     margin: 40px auto;
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 20px;
-    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9); /* Màu trắng đục */
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Header và nút Logout */
+.header {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.logout-btn {
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    background-color: #e74c3c; /* Màu đỏ */
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+.logout-btn:hover {
+    background-color: #c0392b; /* Tối hơn khi hover */
+}
+
+/* Tiêu đề chính */
 h1 {
     text-align: center;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
 }
 
+/* Mỗi section của form */
 .section {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .section h2 {
-    color: #007bff;
+    font-size: 1.2rem;
+    color: #2980b9; /* Xanh đậm */
     margin-bottom: 10px;
 }
 
+.section h3 {
+    font-size: 1.1rem;
+    color: #2980b9;
+    margin-bottom: 8px;
+}
+
+/* Đoạn mô tả, hướng dẫn */
+.section p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Đường kẻ ngang */
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 30px 0;
+}
+
+/* Form-group và nhãn */
 .form-group {
     margin-bottom: 15px;
 }
 
-label {
+.form-group label {
     font-size: 16px;
-    color: #333;
+    color: #2c3e50;
+    cursor: pointer; /* Để khi hover có cảm giác clickable */
 }
 
-input[type="text"],
-textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
+/* Checkbox và Radio */
 input[type="checkbox"],
 input[type="radio"] {
     margin-right: 8px;
-}
-
-.submit-btn {
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
-    font-size: 18px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
+    transform: scale(1.1);
     cursor: pointer;
 }
 
+/* Các ô input text, textarea */
+input[type="text"],
+textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Nếu muốn PGD Code và PGD Name nằm cạnh nhau, có thể bỏ comment đoạn sau */
+/*
+#pgd_code,
+#pgd_name {
+    width: calc(50% - 10px);
+    display: inline-block;
+    margin-right: 10px;
+}
+*/
+
+/* Nút Gửi Khảo Sát */
+.submit-btn {
+    display: block;
+    width: 220px;
+    margin: 30px auto 0; /* Căn giữa, cách phía trên 30px */
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #2980b9; /* Xanh đậm */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
 .submit-btn:hover {
-    background-color: #0056b3;
+    background-color: #1f6ca6; /* Tối hơn khi hover */
 }
 

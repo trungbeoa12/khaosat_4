@@ -1,61 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Survey Home</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("static/Theme-03.png") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    .container {
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      margin: 50px auto;
+      color: #333;
+    }
+    h1 {
+      color: #2c3e50;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    p, ul {
+      text-align: justify;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .navbar {
+      background: rgba(0, 0, 0, 0.9) !important;
+      padding: 15px;
+    }
+    .navbar-brand {
+      color: #333 !important;
+      font-weight: bold;
+    }
+    .nav-link {
+      color: #333 !important;
+      font-weight: bold;
+    }
+    .nav-link:hover {
+      color: #000 !important;
+      text-decoration: underline;
+    }
+    .btn-dark {
+      background-color: #333 !important;
+      color: white !important;
+    }
+    .btn-dark:hover {
+      background-color: #000 !important;
+      color: white !important;
+    }
+  </style>
 </head>
-<body class="bg-light">
+<body>
 
   <!-- Thanh điều hướng (Navbar) -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Survey App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        {% if current_user.is_authenticated %}
-          <li class="nav-item">
-            <span class="nav-link">Hi, {{ current_user.username }}!</span>
-          </li>
-          {% if current_user.is_admin %}
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Survey App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          {% if current_user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('admin.admin_panel') }}">Admin Panel</a>
+              <span class="nav-link">Xin chào, {{ current_user.username }}!</span>
+            </li>
+            {% if current_user.is_admin %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('admin.admin_panel') }}">Admin Panel</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('survey') }}">Tham gia Khảo sát</a>
+              </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('auth.logout') }}">Đăng xuất</a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('survey') }}">Take Survey</a>
+              <a class="nav-link btn btn-dark" href="{{ url_for('auth.login') }}">Đăng nhập</a>
             </li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-          </li>
-        {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-          </li>
-        {% endif %}
-      </ul>
+        </ul>
+      </div>
     </div>
   </nav>
 
   <!-- Nội dung chính -->
-  <div class="container mt-5">
-    <div class="text-center">
-      <h1 class="display-4">Welcome to the Survey</h1>
-      <p class="lead">
-        Đây là trang chủ khảo sát. Bạn có thể đăng nhập hoặc đi đến trang khảo sát (nếu bạn là user thường), 
-        hoặc truy cập Admin Panel (nếu bạn là admin).
+  {% if current_user.is_authenticated %}
+    <div class="container">
+      <h1>KHẢO SÁT TRIỂN KHAI MÔ HÌNH SIÊU PHÒNG GIAO DỊCH</h1>
+      <p>
+        Nhằm khai thác tối đa hiệu quả mạng lưới hoạt động, đặc biệt tại các địa bàn có tiềm năng phát triển, VietinBank đang nghiên cứu triển khai mô hình Siêu PGD. Một số tiêu chí chính khi xây dựng Siêu PGD gồm:
+      </p>
+      <ul>
+        <li>PGD có quy mô hoạt động siêu lớn (tương đương hoặc gần với một Chi nhánh).</li>
+        <li>PGD có năng suất lao động cao hơn mức bình quân hệ thống, cần bổ sung nguồn lực.</li>
+        <li>PGD có thể khai thác đa dạng sản phẩm dịch vụ, phục vụ nhiều đối tượng khách hàng.</li>
+        <li>PGD có điều kiện cơ sở vật chất khang trang (mặt tiền, diện tích sàn lớn hơn tiêu chuẩn hiện tại).</li>
+        <li>PGD có tối thiểu 10 nhân sự và phân tách nhiệm vụ theo phân khúc khách hàng.</li>
+        <li>PGD có thể áp dụng các thẩm quyền đặc thù (sản phẩm, lãi suất, v.v.) để nâng cao hiệu quả hoạt động.</li>
+      </ul>
+      <p>
+        Để phục vụ nghiên cứu xây dựng mô hình, VietinBank tổ chức khảo sát Quý Anh/Chị Giám đốc/Phó Giám đốc Chi nhánh về các nội dung liên quan đến Siêu PGD.  
+        Ý kiến đóng góp của Quý Anh/Chị là nguồn thông tin quan trọng giúp NHCTVN xây dựng chính sách phù hợp với thực tế hoạt động tại các PGD.
       </p>
     </div>
-  </div>
+  {% else %}
+    <div class="container">
+      <p>Kính chào Quý lãnh A/C lãnh đạo CN VietinBank, anh chị vui lòng đăng nhập để thực hiện khảo sát.</p>
+    </div>
+  {% endif %}
 
   <!-- Bootstrap JS (đặt cuối body để tải trang nhanh hơn) -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>
 

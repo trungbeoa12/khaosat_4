@@ -1,83 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <style>
-    /* Nếu muốn tuỳ chỉnh thêm, bạn có thể thêm code CSS tại đây */
-    body {
-      background-color: #f8f9fa; /* màu nền nhạt của Bootstrap */
-    }
-    .login-container {
-      max-width: 400px;
-      margin: 80px auto;
-      padding: 30px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .login-container h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .back-home {
-      display: block;
-      margin-top: 20px;
-      text-align: center;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Login - Created by CSNS&PTTC</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    
+    <!-- Google Font: Open Sans -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* 
+          1. Đặt font Open Sans làm font chính.
+          2. Dùng gradient overlay chồng lên ảnh Theme-03.png.
+          3. Container trắng đục, bo góc, có shadow.
+          4. Tăng kích thước chữ, màu sắc hài hòa.
+        */
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', Arial, sans-serif;
+            /* Gradient overlay + ảnh nền */
+            background: linear-gradient(135deg, rgba(166,192,254,0.8) 0%, rgba(246,128,132,0.8) 100%), 
+                        url('./static/Theme-03.png') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        /* Navbar */
+        .navbar-dark .navbar-brand {
+            font-weight: 600;
+        }
+
+        /* Container đăng nhập */
+        .login-container {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Header (logo + dòng chữ nhỏ) */
+        .login-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-logo {
+            height: 70px; 
+            margin-bottom: 10px;
+        }
+
+        .login-title {
+            font-size: 14px;
+            color: #555;
+            letter-spacing: 1px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .login-title::before {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 1px;
+            background-color: #ddd;
+            margin: 10px auto;
+        }
+
+        /* Tiêu đề Login */
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Nhãn form */
+        .form-group label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Input Bootstrap form-control bo góc nhẹ */
+        .form-control {
+            border-radius: 4px;
+        }
+
+        /* Nút Login chính */
+        .btn-primary {
+            background-color: #2980b9;
+            border: none;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background-color: #1f6ca6;
+        }
+
+        /* Link Back to Home */
+        .back-home {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .back-home:hover {
+            text-decoration: none;
+            color: #2980b9;
+        }
+    </style>
 </head>
 <body>
 
-<!-- Navbar nếu bạn muốn (tùy chọn) -->
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Survey App</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-      <!-- Nếu cần thêm item, bỏ vào đây -->
-    </ul>
-  </div>
+    <a class="navbar-brand" href="#">Survey App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <!-- Thêm các menu item khác nếu cần -->
+        </ul>
+    </div>
 </nav>
 
+<!-- Form Login Container -->
 <div class="login-container">
-  <h1>Login</h1>
-  <form method="POST">
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input 
-        type="text" 
-        class="form-control" 
-        id="username" 
-        name="username" 
-        required 
-        autofocus
-        placeholder="Nhập tên đăng nhập"
-      >
+    <div class="login-header">
+        <img src="static/VietinBank logo-01.png" alt="Logo VietinBank" class="login-logo">
+        <p class="login-title">Created by CSNS&PTTC</p>
     </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input 
-        type="password" 
-        class="form-control" 
-        id="password" 
-        name="password" 
-        required
-        placeholder="Nhập mật khẩu"
-      >
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">Login</button>
-  </form>
-  <a href="{{ url_for('home') }}" class="back-home">Back to Home</a>
+    <h1>Login</h1>
+    <form method="POST">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" required autofocus placeholder="Nhập tên đăng nhập">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required placeholder="Nhập mật khẩu">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+    <a href="{{ url_for('home') }}" class="back-home">Back to Home</a>
 </div>
 
-<!-- Bootstrap JS đặt cuối body -->
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 </body>
