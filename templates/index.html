@@ -60,6 +60,25 @@
       background-color: #000 !important;
       color: white !important;
     }
+    /* Style cho nút "Tham gia khảo sát xuống cuối" */
+    .scroll-to-bottom {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      font-size: 18px;
+      padding: 12px 20px;
+      border: 2px solid #fff;
+      border-radius: 50px;
+      background-color: #e74c3c; /* Màu đỏ nổi bật */
+      color: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .scroll-to-bottom:hover {
+      background-color: #c0392b;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
@@ -124,6 +143,11 @@
       <p>Kính chào Quý lãnh A/C lãnh đạo CN VietinBank, anh chị vui lòng đăng nhập để thực hiện khảo sát.</p>
     </div>
   {% endif %}
+
+  <!-- Nút "Tham gia khảo sát xuống cuối" nổi bật -->
+  <button type="button" class="scroll-to-bottom" onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });">
+    Tham gia khảo sát!
+  </button>
 
   <!-- Bootstrap JS (đặt cuối body để tải trang nhanh hơn) -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>

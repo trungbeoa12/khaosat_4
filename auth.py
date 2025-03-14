@@ -8,7 +8,7 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username'].strip()
+        username = request.form['username'].strip().upper()
         password = request.form['password'].strip()
 
         print(f"🔍 Đang kiểm tra đăng nhập: {username} - {password}")  # Debug
