@@ -60,7 +60,7 @@
       background-color: #000 !important;
       color: white !important;
     }
-    /* Style cho nút "Tham gia khảo sát xuống cuối" */
+    /* Style cho nút "Thực hiện khảo sát" */
     .scroll-to-bottom {
       position: fixed;
       bottom: 20px;
@@ -144,10 +144,12 @@
     </div>
   {% endif %}
 
-  <!-- Nút "Tham gia khảo sát xuống cuối" nổi bật -->
-  <button type="button" class="scroll-to-bottom" onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });">
-    Tham gia khảo sát!
-  </button>
+  <!-- Nút "Thực hiện khảo sát" chỉ hiển thị khi đăng nhập -->
+  {% if current_user.is_authenticated %}
+    <button type="button" class="scroll-to-bottom" onclick="window.location.href = '{{ url_for('survey') }}';">
+      Thực hiện khảo sát
+    </button>
+  {% endif %}
 
   <!-- Bootstrap JS (đặt cuối body để tải trang nhanh hơn) -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
