@@ -237,6 +237,16 @@
             <button type="submit" class="submit-btn">Gửi Khảo Sát</button>
         </form>
     </div>
+    <script>
+      // Kiểm tra nếu chưa chọn radio ở câu hỏi 1 thì chặn submit form
+      document.querySelector('form').addEventListener('submit', function(e) {
+          var radioSelected = document.querySelector('input[name="propose_sieupgd"]:checked');
+          if (!radioSelected) {
+              e.preventDefault();
+              alert("Vui lòng chọn 'Có' hoặc 'Không' với đề xuất mô hình Siêu Phòng Giao Dịch!");
+          }
+      });
+    </script>
 </body>
 </html>
 
